@@ -1,51 +1,70 @@
-function setup() {
-  createCanvas(600, 400);
-}
-
-function draw() {
-  background(100,200,255);
-  fill(200,200,255)
-  square(10, 20, 150)
-  
-  fill(0, 0, 255)
-  ellipse(60,50,10,10)
-  
-  fill(255, 0, 0)
-  ellipse(100,50,10,10)
-  
-  line(60,55,85,80)
-  line(100,55,85,80)
-  
-  fill(255,255,0)
-  triangle( 15, 35,85,80,35,145)
-  triangle(85,80,145,35,115,145)
-  
-  noStroke()
-  fill(150,100,20)
-  rect(455,100,50,190)
-  
-  fill(0,255,0)
-  ellipse(450,80,200,60)
-  ellipse(450,80,100,90)
-  
-  fill(10,30,110)
-  rect(0,290,600,110)
-  
-  stroke(255,0,0)
-  fill(250)
-  ellipse(250,300,40)
-  
-  stroke(0)
-  
-  fill(0,250,0)
-  ellipse(300,270,70)
-  
-  fill(0,0,250)
-  ellipse(360,280,50)
-  
-  fill(250,0,0)
-  ellipse(415,280,60)
-  
-  fill(20,10,75)
-  ellipse(460,290,30)
+function setup() 
+{ createCanvas(600, 400); noLoop(); }
+ function draw() 
+{ background('#F0F0F0'); noStroke(); 
+// 뒷머리 
+fill(0); rectMode(CENTER); 
+rect(300, 230, 120, 260, 40); 
+// 얼굴 
+fill('#FFE0BD'); 
+ellipse(300, 180, 90, 110);
+ // 귀
+ fill('#FFE0BD');
+ ellipse(255, 180, 20, 28);
+ ellipse(345, 180, 20, 28); 
+// 목 
+fill('#FFE0BD');
+ rect(300, 240, 24, 40, 6); 
+// 얼굴 아래쪽 중심에 연결 
+// 옷
+ fill('#689ACD');
+ quad(255, 255, 345, 255, 380, 400, 220, 400);
+ //앞머리
+ fill(0); 
+arc(300, 155, 120, 70, PI, TWO_PI); 
+// 눈
+ noStroke(); 
+fill(255);
+ ellipse(280, 175, 26, 26); 
+ellipse(320, 175, 26, 26); 
+// 눈동자
+ fill(0);
+ ellipse(280, 175, 8, 8); 
+ellipse(320, 175, 8, 8); 
+// 쌍커풀풀 
+noFill(); 
+stroke(80); 
+strokeWeight(1);
+ arc(280, 170, 30, 10, PI, TWO_PI);
+ // 왼쪽 쌍꺼풀
+ arc(320, 170, 30, 10, PI, TWO_PI); 
+// 오른쪽 쌍꺼풀
+ // 속눈썹 
+stroke(0); 
+strokeWeight(1.8);
+ // 왼쪽
+ line(272, 163, 275, 167);
+ line(280, 161, 280, 167); 
+line(288, 163, 285, 167); 
+// 오른쪽
+ line(312, 163, 315, 167);
+ line(320, 161, 320, 167);
+ line(328, 163, 325, 167); 
+// 코 
+stroke(0);
+ strokeWeight(1.5); 
+line(300, 182, 300, 195);
+ noStroke(); 
+// 입
+ noFill();
+ stroke('#C94C4C'); 
+strokeWeight(2); 
+arc(300, 205, 36, 20, 0, PI); 
+//선글라 
+fill('#2F2F3D'); 
+stroke(0);
+ strokeWeight(1.5); 
+ellipse(275, 140, 40, 22); 
+ellipse(325, 140, 40, 22);
+ line(295, 140, 305, 140); 
 }
