@@ -1,85 +1,80 @@
-let recording = false;    
-let recordFrame = 0;     
-let totalFrames = 300;   
+let blink = 0;
+let blinkSpeed = 0.05;
+let hairOffset = 0;
+let bgColors = ['#FF6B6B', '#FFD93D', '#6BCB77', '#4D96FF', '#B983FF'];
+let bgIndex = 0;
+let recording = false;
 
 function setup() {
   createCanvas(600, 400);
-  colorMode(RGB);
-  frameRate(30); 
-  setTimeout(() => {
-    recording = true;
-    saveGif('과제4유정윤', 10); 
-  }, 2000);
+  frameRate(30);
 }
 
 function draw() {
+  background(bgColors[bgIndex]);
+  hairOffset = sin(frameCount * 0.05) * 6;
+  noStroke();
 
-  let c1 = color(100, 200, 255);
-  let c2 = color(255, 170, 200);
-  let bgColor = lerpColor(c1, c2, abs(sin(frameCount * 0.01)));
-  background(bgColor);
+  fill(0);
+  rectMode(CENTER);
+  rect(300 + hairOffset, 230, 120, 260, 40);
 
-  // 나비 몸통 위치
-  let bodyX = 85;
-  let bodyY = 80;
+  fill('#FFE0BD');
+  ellipse(300, 180, 90, 110);
+  fill('#FFE0BD');
+  ellipse(255, 180, 20, 28);
+  ellipse(345, 180, 20, 28);
+  fill('#FFE0BD');
+  rect(300, 240, 24, 40, 6);
 
-  // 날개 폭(길이)
-  let wingWidth = 90 + 20 * sin(frameCount * 0.07);
+  fill('#689ACD');
+  quad(255, 255, 345, 255, 380, 400, 220, 400);
 
-  // 나비 얼굴
-  let faceSize = 150;
-  fill(230, 200, 255);
-  square(10, 20, faceSize);
+  fill(0);
+  arc(300, 155, 120, 70, PI, TWO_PI);
 
-  // 나비 왼쪽 눈 
-  fill(0, 0, 255);
-  ellipse(60,50,10,10);
-
-  // 나비 오른쪽 눈
-  fill(255, 0, 0);
-  ellipse(100,50,10,10);
-
-  // 나비 더듬이
-  stroke(75,0,0);
-  line(60,55,bodyX,bodyY);
-  line(100,55,bodyX,bodyY);
-
-  // 나비 왼쪽 날개(삼각형: 윗쪽-중앙-아랫쪽)
-  fill(255,255,0);
-  triangle(15, 35, bodyX, bodyY, bodyX - wingWidth, 145);
-
-  // 나비 오른쪽 날개(삼각형: 중앙-윗쪽-아랫쪽)
-  fill(255,255,30);
-  triangle(bodyX, bodyY, 145, 35, bodyX + wingWidth, 145);
+  blink += blinkSpeed;
+  let blinkValue = abs(sin(blink));
+  let eyeHeight = map(blinkValue, 0, 1, 2, 26);
 
   noStroke();
-  // 나뭇가지
-  fill(150,100,20);
-  rect(455,100,50,190);
+  fill(255);
+  ellipse(280, 175, 26, eyeHeight);
+  ellipse(320, 175, 26, eyeHeight);
 
-  // 나뭇잎
-  fill(0,255,0);
-  ellipse(450,80,200,60);
-  ellipse(450,80,100,90);
+  fill(0);
+  ellipse(280, 175, 8, eyeHeight / 3);
+  ellipse(320, 175, 8, eyeHeight / 3);
 
-  // 바닥 
-  fill(10,30,110);
-  rect(0,290,600,110);
+  noFill();
+  stroke(80); strokeWeight(1);
+  arc(280, 170, 30, 10, PI, TWO_PI);
+  arc(320, 170, 30, 10, PI, TWO_PI);
 
-  stroke(255,0,0);
-  fill(250 - 150 * abs(sin(frameCount*0.07)));
-  ellipse(250 + 20 * sin(frameCount * 0.08),300,40 + 10*sin(frameCount*0.09));
+  stroke(0); strokeWeight(1.8);
+  line(272, 163, 275, 167);
+  line(280, 161, 280, 167);
+  line(288, 163, 285, 167);
+  line(312, 163, 315, 167);
+  line(320, 161, 320, 167);
+  line(328, 163, 325, 167);
 
-  stroke(0);
-  fill(0,250,0 + 80 * abs(cos(frameCount * 0.21)));
-  ellipse(300,270 + 10*sin(frameCount*0.10),70 + 10*sin(frameCount*0.067));
+  stroke(0); strokeWeight(1.5);
+  line(300, 182, 300, 195); noStroke();
 
-  fill(0,0,250 + 60 * abs(sin(frameCount * 0.065)));
-  ellipse(360,280,50 + 10 * cos(frameCount * 0.06));
+  noFill(); stroke('#C94C4C'); strokeWeight(2);
+  arc(300, 205, 36, 20, 0, PI);
 
-  fill(250,0,0 + 85 * abs(sin(frameCount * 0.086)));
-  ellipse(415,280 + 12*cos(frameCount*0.13),60 + 12*cos(frameCount*0.16));
+  fill('#2F2F3D'); stroke(0); strokeWeight(1.5);
+  ellipse(275, 140, 40, 22); ellipse(325, 140, 40, 22); line(295, 140, 305, 140);
+}
 
-  fill(20,10,75 + 100 * abs(sin(frameCount * 0.11)));
-  ellipse(460,290,30 + 7*sin(frameCount * 0.16));
+function mousePressed() {
+  bgIndex = (bgIndex + 1) % bgColors.length;
+}
+
+function keyPressed() {
+  if (key === 's' ) {
+    saveGif('과제 3', 10);
+  }
 }
